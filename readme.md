@@ -15,6 +15,7 @@ Projede bağımlılıkları azaltmak için datalar **in-memory** çalışacak ş
  - Domain Driven Design
  - Clean Architecture (onion)
  - Event Driven Architecture
+ - CQRS Design Pattern
  - Command Design Pattern
 
 ### Çalıştırma
