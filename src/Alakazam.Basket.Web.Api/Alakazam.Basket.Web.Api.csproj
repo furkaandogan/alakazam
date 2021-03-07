@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alakazam.Basket.Application\Alakazam.Basket.Application.csproj" />
+    <ProjectReference Include="..\Alakazam.Basket.Infrastructure\Alakazam.Basket.Infrastructure.csproj" />
+    <ProjectReference Include="..\Alakazam.Framework\Alakazam.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+
+</Project>

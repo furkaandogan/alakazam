@@ -1,0 +1,12 @@
+node_modules
+mocks
+tests
+docker
+.vscode
+*.log
+.git
+.cache
+jsons
+!README*.md
+README-secret.md
+package-lock.json
