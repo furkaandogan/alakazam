@@ -5,7 +5,7 @@ Projede bağımlılıkları azaltmak için datalar **in-memory** çalışacak ş
 
 
 
-### Kullanılan Teknoloji ve Metodoloji
+### Kullanılan Bazı Teknoloji ve Metodoloji
 
  - donet core 3.1 (c# lang)
  - xunit
