@@ -3,6 +3,8 @@
 
 Projede bağımlılıkları azaltmak için datalar **in-memory** çalışacak şekilde geliştirildi.
 
+NOT: internal ip olarak kurgulandığı için auth yapısı yoktur expose edilen gateway üzerinden handle edilip bakcend pass edilecek kurgusu ile geliştirildi.
+
 
 
 ### Kullanılan Bazı Teknoloji ve Metodoloji
