@@ -9,14 +9,17 @@ namespace Alakazam.Framework
 
         public string Code { get; private set; }
 
+        public string Symbol { get; private set; }
+
         static Currency()
         {
-            TL = new Currency("try");
+            TL = new Currency("try","₺");
         }
 
-        public Currency(string code)
+        public Currency(string code, string symbol)
         {
             Code = code;
+            Symbol = symbol;
         }
 
 
@@ -38,7 +41,7 @@ namespace Alakazam.Framework
 
         public int CompareTo(Currency other)
         {
-            if (other is null) 
+            if (other is null)
                 throw new ArgumentNullException(nameof(other));
 
             return Code.CompareTo(other.Code);

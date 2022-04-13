@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Alakazam.Basket.Domain\Alakazam.Basket.Domain.csproj" />
-    <ProjectReference Include="..\Alakazam.Basket.Infrastructure\Alakazam.Basket.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

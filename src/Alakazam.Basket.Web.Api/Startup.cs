@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Alakazam.Basket.Application;
 using Microsoft.OpenApi.Models;
+using Alakazam.Basket.Infrastructure;
 
 namespace Alakazam.Basket.Web.Api
 {
@@ -33,6 +34,7 @@ namespace Alakazam.Basket.Web.Api
             services.AddSingleton<IdentityContext,IdentityContext>();
             services
                 .SetupApp()
+                .SetupInfra()
                 .AddSwaggerGen(c =>
                 {
                     c.OperationFilter<AuthHeaderParameterOperationFilter>();

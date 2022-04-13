@@ -1,4 +1,5 @@
 using Alakazam.Basket.Application.Contract;
+using Alakazam.Framework;
 using AutoMapper;
 
 namespace Alakazam.Basket.Application.Mappings
@@ -12,6 +13,7 @@ namespace Alakazam.Basket.Application.Mappings
             CreateMap<Basket.Domain.BasketItem.BasketItem, BasketItemContract>();
             CreateMap<Basket.Domain.BasketItem.Product, ProductContract>();
             CreateMap<Basket.Domain.BasketItem.ProductMetadata, ProductMetadataContract>();
+            CreateMap<Money, MoneyContract>();
         }
     }
 }

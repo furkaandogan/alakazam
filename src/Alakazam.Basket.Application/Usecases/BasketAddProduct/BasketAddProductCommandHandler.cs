@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Alakazam.Basket.Application.Adapters.Product;
 using Alakazam.Basket.Application.Contract;
 using Alakazam.Basket.Domain;
 using Alakazam.Basket.Domain.Commands;
-using Alakazam.Basket.Infrastructure.Adapters.Product;
 using Alakazam.Framework;
 using AutoMapper;
 
@@ -14,19 +14,19 @@ namespace Alakazam.Basket.Application.Usecases.BasketAddProduct
     {
         private readonly IBasketQueryRepository _basketQueryRepository;
         private readonly IBasketCommandRepository _basketCommandRepository;
-        private readonly ProductApiAdapter _productApiAdapter;
+        private readonly IProductAdapter _productApiAdapter;
         private readonly IMapper _mapper;
-        public BasketAddProductCommandHandler(IBasketQueryRepository basketQueryRepository, IBasketCommandRepository basketCommandRepository, ProductApiAdapter productApiAdapter, IMapper mapper)
+        public BasketAddProductCommandHandler(IBasketQueryRepository basketQueryRepository, IBasketCommandRepository basketCommandRepository, IProductAdapter productAdapter, IMapper mapper)
         {
             _basketQueryRepository = basketQueryRepository;
             _basketCommandRepository = basketCommandRepository;
-            _productApiAdapter = productApiAdapter;
+            _productApiAdapter = productAdapter;
             _mapper = mapper;
         }
 
         public async Task<BasketAddProductCommandResult> HandleAsync(BasketAddProductCommand command, CancellationToken cancellationToken)
         {
-            Infrastructure.Adapters.Product.Product productResponse = await _productApiAdapter.GetByIdAsync(command.ProductId, cancellationToken);
+            Product productResponse = await _productApiAdapter.GetByIdAsync(command.ProductId, cancellationToken);
 
             Guard.That(productResponse == null, ApplicationErrors.ProductCanNotBeFetch);
 

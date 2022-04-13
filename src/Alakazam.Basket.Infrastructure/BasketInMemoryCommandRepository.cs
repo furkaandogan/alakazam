@@ -23,7 +23,8 @@ namespace Alakazam.Basket.Infrastructure
             if(index!=-1)
                 _context.Baskets.RemoveAt(index);
             _context.Baskets.Add(basket);
-            return basket;
+            
+            return await Task.FromResult<Domain.Basket>(basket);
         }
     }
 }

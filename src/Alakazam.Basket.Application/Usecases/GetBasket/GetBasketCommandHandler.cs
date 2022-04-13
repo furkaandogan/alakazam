@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Alakazam.Basket.Application.Adapters.Product;
 using Alakazam.Basket.Application.Contract;
 using Alakazam.Basket.Domain;
 using Alakazam.Basket.Domain.Commands;
-using Alakazam.Basket.Infrastructure.Adapters.Product;
 using Alakazam.Framework;
 using AutoMapper;
 
@@ -14,12 +14,12 @@ namespace Alakazam.Basket.Application.Usecases.GetBasket
         : ICommandHandler<GetBasketCommand, GetBasketCommandResult>
     {
         private readonly IBasketQueryRepository _basketQueryRepository;
-        private readonly ProductApiAdapter _productApiAdapter;
+        private readonly IProductAdapter _productAdapter;
         private readonly IMapper _mapper;
-        public GetBasketCommandHandler(IBasketQueryRepository basketQueryRepository, ProductApiAdapter productApiAdapter, IMapper mapper)
+        public GetBasketCommandHandler(IBasketQueryRepository basketQueryRepository, IProductAdapter productAdapter, IMapper mapper)
         {
             _basketQueryRepository = basketQueryRepository;
-            _productApiAdapter = productApiAdapter;
+            _productAdapter = productAdapter;
             _mapper = mapper;
         }
 

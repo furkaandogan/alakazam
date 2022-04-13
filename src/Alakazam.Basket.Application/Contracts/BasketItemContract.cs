@@ -8,7 +8,7 @@ namespace Alakazam.Basket.Application.Contract
         public Guid Id { get; set; }
         public ushort Quantity { get; set; }
         public ProductContract Product { get; set; }
-        public Money Price { get; set; }
-        public Money Tax { get; set; }
+        public MoneyContract Price { get; set; }
+        public MoneyContract Tax { get; set; }
     }
 }

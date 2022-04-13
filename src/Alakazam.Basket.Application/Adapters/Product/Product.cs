@@ -1,6 +1,6 @@
 using System;
 
-namespace Alakazam.Basket.Infrastructure.Adapters.Product
+namespace Alakazam.Basket.Application.Adapters.Product
 {
     public sealed class Product
     {

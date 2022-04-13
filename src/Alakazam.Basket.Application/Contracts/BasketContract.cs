@@ -8,7 +8,7 @@ namespace Alakazam.Basket.Application.Contract
     {
         public Guid Id { get; set; }
         public IList<BasketItemContract> Items { get; set; }
-        public Money TotalPrice { get; set; }
-        public Money TotalTax { get; set; }
+        public MoneyContract TotalPrice { get; set; }
+        public MoneyContract TotalTax { get; set; }
     }
 }

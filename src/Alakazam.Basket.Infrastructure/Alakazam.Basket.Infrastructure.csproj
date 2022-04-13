@@ -3,6 +3,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Alakazam.Framework\Alakazam.Framework.csproj" />
     <ProjectReference Include="..\Alakazam.Basket.Domain\Alakazam.Basket.Domain.csproj" />
+    <ProjectReference Include="..\Alakazam.Basket.Application\Alakazam.Basket.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

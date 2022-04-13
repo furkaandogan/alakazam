@@ -4,10 +4,8 @@ using Alakazam.Basket.Domain.Commands;
 using Alakazam.Basket.Application.Usecases.BasketAddProduct;
 using AutoMapper;
 using Alakazam.Basket.Application.Mappings;
-using Alakazam.Basket.Infrastructure;
-using Alakazam.Basket.Domain;
-using Alakazam.Basket.Infrastructure.Adapters.Product;
 using Alakazam.Basket.Application.Usecases.GetBasket;
+using Alakazam.Basket.Application.Adapters.Product;
 
 namespace Alakazam.Basket.Application
 {
@@ -16,8 +14,6 @@ namespace Alakazam.Basket.Application
         public static IServiceCollection SetupApp(this IServiceCollection services)
         {
             return services
-                .SetupRepository()
-                .SetupAdaptor()
                 .SetupCommandHandler()
                 .SetupMappings();
         }
@@ -28,18 +24,7 @@ namespace Alakazam.Basket.Application
             services.AddSingleton<ICommandHandler<GetBasketCommand, GetBasketCommandResult>, GetBasketCommandHandler>();
             return services;
         }
-        private static IServiceCollection SetupAdaptor(this IServiceCollection services)
-        {
-            services.AddSingleton<ProductApiAdapter, ProductApiAdapter>();
-            return services;
-        }
-        private static IServiceCollection SetupRepository(this IServiceCollection services)
-        {
-            services.AddSingleton<IBasketCommandRepository,BasketInMemoryCommandRepository>();
-            services.AddSingleton<IBasketQueryRepository,BasketInMemoryQueryRepository>();
-            services.AddSingleton<InMemoryContext, InMemoryContext>();
-            return services;
-        }
+
         private static IServiceCollection SetupMappings(this IServiceCollection services)
         {
             return services.AddAutoMapper(cfg =>{
