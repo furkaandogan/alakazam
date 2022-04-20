@@ -39,7 +39,7 @@ namespace Alakazam.Basket.Domain.BasketItem
             Guard.That(Product.Metadata.MaximumPurchasable < quantity, BasketDomainErrors.BasketItemQuantityCanNotBeGreatherThanProductStock);
             Quantity = quantity;
             Calculate();
-            
+
             return this;
         }
 
@@ -53,5 +53,9 @@ namespace Alakazam.Basket.Domain.BasketItem
             return this;
         }
 
+        internal void IncQuantity()
+        {
+            SetQuantity((ushort)(Quantity+1));
+        }
     }
 }

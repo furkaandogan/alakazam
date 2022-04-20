@@ -27,6 +27,7 @@ namespace Alakazam.Basket.Domain
             ProductMetadataCanNotBeNull = new DomainException("ProductMetadataCanNotBeNull", "<doc-link>");
             BasketItemQuantityCanNotBeGreatherThanProductStock = new DomainException("BasketItemQuantityCanNotBeGreatherThanProductStock", "<doc-link>", HttpStatusCode.PreconditionFailed);
             BasketItemQuantityCanNotBeGreatherThanProductMaximumPurchasable = new DomainException("BasketItemQuantityCanNotBeGreatherThanProductMaximumPurchasable", "<doc-link>", HttpStatusCode.PreconditionFailed);
+
         }
     }
 }

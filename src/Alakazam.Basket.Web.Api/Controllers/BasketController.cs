@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Alakazam.Basket.Application.Contract;
-using Alakazam.Basket.Application.Usecases;
-using Alakazam.Basket.Application.Usecases.BasketAddProduct;
+using Alakazam.Basket.Application.Usecases.AddProductToBasket;
 using Alakazam.Basket.Application.Usecases.GetBasket;
 using Alakazam.Basket.Domain.Commands;
-using Alakazam.Basket.Web.Api.Models.Request.AddProduct;
+using Alakazam.Basket.Web.Api.Models.Rquets;
 using Alakazam.Framework;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -36,10 +32,11 @@ namespace Alakazam.Basket.Web.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<BasketContract> AddProductAsync([FromServices] ICommandHandler<BasketAddProductCommand, BasketAddProductCommandResult> handler, [FromBody] AddProductRequest request)
+        public async Task<BasketContract> AddProductToBasketAsync([FromServices] ICommandHandler<BasketAddProductCommand, AddProductToBasketCommandResult> handler, [FromBody] AddProductRequest request)
         {
-            BasketAddProductCommandResult result = await handler.HandleAsync(new BasketAddProductCommand(_identityContext.Get().ToCustomer(), request.Quantity, request.ProductId), new CancellationToken());
+            AddProductToBasketCommandResult result = await handler.HandleAsync(new BasketAddProductCommand(_identityContext.Get().ToCustomer(), (ushort)request.Quantity, request.ProductId), new CancellationToken());
             return result.Basket;
         }
+
     }
 }

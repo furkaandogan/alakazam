@@ -13,7 +13,7 @@ namespace Alakazam.Basket.Domain.Test
         public void Create_ShouldSuccess_WhenValidProduct()
         {
             Guid productId = Guid.NewGuid();
-            BasketItem.Product product = new BasketItem.Product(productId,10,18);
+            BasketItem.Product product = new BasketItem.Product(productId, 10, 18, FakeDataGenerator.CreateProductMetadata());
 
             product.Id.Should().Be(productId);
             product.Price.Should().NotBeNull();
@@ -26,7 +26,7 @@ namespace Alakazam.Basket.Domain.Test
         {
             Action basketItemCreate = () =>
             {
-                BasketItem.Product product = new BasketItem.Product(Guid.NewGuid(), 0, 0);
+                BasketItem.Product product = new BasketItem.Product(Guid.NewGuid(), 0, 0, FakeDataGenerator.CreateProductMetadata());
             };
 
             basketItemCreate.Should()
@@ -40,7 +40,7 @@ namespace Alakazam.Basket.Domain.Test
         {
             Action basketItemCreate = () =>
             {
-                BasketItem.Product product = new BasketItem.Product(Guid.NewGuid(), -1, 0);
+                BasketItem.Product product = new BasketItem.Product(Guid.NewGuid(), -1, 0, FakeDataGenerator.CreateProductMetadata());
             };
 
             basketItemCreate.Should()

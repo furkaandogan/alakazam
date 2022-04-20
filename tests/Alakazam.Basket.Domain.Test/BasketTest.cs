@@ -11,7 +11,7 @@ namespace Alakazam.Basket.Domain.Test
         public void Create_ShouldSuccess_WhenValidData()
         {
             Guid productId = Guid.NewGuid();
-            BasketItem.Product product = new BasketItem.Product(productId, 10, 18);
+            BasketItem.Product product = new BasketItem.Product(productId, 10, 18, FakeDataGenerator.CreateProductMetadata());
             BasketItem.BasketItem basketItem = new BasketItem.BasketItem(2, product);
 
             basketItem.Id.Should().NotBe(Guid.Empty);
@@ -26,8 +26,7 @@ namespace Alakazam.Basket.Domain.Test
         public void AddProduct_ShouldSuccess_WhenValidData()
         {
             Guid productId = Guid.NewGuid();
-            BasketItem.Product product = new BasketItem.Product(productId, 100, 18)
-                .SetMetadata(new BasketItem.ProductMetadata("Test Ürün", 10, 10));
+            BasketItem.Product product = new BasketItem.Product(productId, 100, 18, new BasketItem.ProductMetadata("Test Ürün", 10, 10));
             Basket basket = new Basket(new Customer(Guid.NewGuid()));
 
             basket.AddProduct(2, product);
@@ -43,8 +42,7 @@ namespace Alakazam.Basket.Domain.Test
         public void AddProductWithExistsProduct_ShouldSuccess_WhenValidData()
         {
             Guid productId = Guid.NewGuid();
-            BasketItem.Product product = new BasketItem.Product(productId, 100, 18)
-                .SetMetadata(new BasketItem.ProductMetadata("Test Ürün", 10, 10));
+            BasketItem.Product product = new BasketItem.Product(productId, 100, 18, new BasketItem.ProductMetadata("Test Ürün", 10, 10));
             Basket basket = new Basket(new Customer(Guid.NewGuid()));
 
             basket.AddProduct(2, product);
@@ -61,8 +59,8 @@ namespace Alakazam.Basket.Domain.Test
         public void AddProduct_ShouldThrowException_WhenStockLessThanQuantity()
         {
             Guid productId = Guid.NewGuid();
-            BasketItem.Product product = new BasketItem.Product(productId, 100, 18)
-                .SetMetadata(new BasketItem.ProductMetadata("Test Ürün", 1, 10));
+            BasketItem.Product product = new BasketItem.Product(productId, 100, 18, new BasketItem.ProductMetadata("Test Ürün", 1, 10));
+
             Basket basket = new Basket(new Customer(Guid.NewGuid()));
             Action addProduct = () =>
                        {
@@ -76,8 +74,8 @@ namespace Alakazam.Basket.Domain.Test
         public void AddProduct_ShouldThrowException_WhenMaximumPurchasableLessThanQuantity()
         {
             Guid productId = Guid.NewGuid();
-            BasketItem.Product product = new BasketItem.Product(productId, 100, 18)
-                .SetMetadata(new BasketItem.ProductMetadata("Test Ürün", 10, 1));
+            BasketItem.Product product = new BasketItem.Product(productId, 100, 18, new BasketItem.ProductMetadata("Test Ürün", 10, 1));
+
             Basket basket = new Basket(new Customer(Guid.NewGuid()));
             Action addProduct = () =>
                        {

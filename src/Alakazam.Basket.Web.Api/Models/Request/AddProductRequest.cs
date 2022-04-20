@@ -1,10 +1,10 @@
 using System;
 
-namespace Alakazam.Basket.Web.Api.Models.Request.AddProduct
+namespace Alakazam.Basket.Web.Api.Models.Rquets
 {
     public sealed class AddProductRequest
     {
-        public ushort Quantity { get; set; }
         public Guid ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }

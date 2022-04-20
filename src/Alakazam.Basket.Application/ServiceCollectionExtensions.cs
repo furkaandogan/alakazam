@@ -1,11 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Alakazam.Framework;
 using Alakazam.Basket.Domain.Commands;
-using Alakazam.Basket.Application.Usecases.BasketAddProduct;
 using AutoMapper;
 using Alakazam.Basket.Application.Mappings;
 using Alakazam.Basket.Application.Usecases.GetBasket;
 using Alakazam.Basket.Application.Adapters.Product;
+using Alakazam.Basket.Application.Usecases.AddProductToBasket;
 
 namespace Alakazam.Basket.Application
 {
@@ -20,8 +20,8 @@ namespace Alakazam.Basket.Application
 
         private static IServiceCollection SetupCommandHandler(this IServiceCollection services)
         {
-            services.AddSingleton<ICommandHandler<BasketAddProductCommand, BasketAddProductCommandResult>,BasketAddProductCommandHandler>();
             services.AddSingleton<ICommandHandler<GetBasketCommand, GetBasketCommandResult>, GetBasketCommandHandler>();
+            services.AddSingleton<ICommandHandler<BasketAddProductCommand, AddProductToBasketCommandResult>, AddProductToBasketCommandHandler>();
             return services;
         }
 

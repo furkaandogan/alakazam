@@ -8,7 +8,7 @@ namespace Alakazam.Basket.Application.Adapters.Product
         public string Name { get; set; }
         public decimal SellingPrice { get; set; }
         public int TaxRate { get; set; }
-        public int Stock { get; set; }
-        public int MaximumPurchasable { get; set; }
+        public uint Stock { get; set; }
+        public uint MaximumPurchasable { get; set; }
     }
 }

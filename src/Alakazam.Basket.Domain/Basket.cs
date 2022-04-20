@@ -13,6 +13,8 @@ namespace Alakazam.Basket.Domain
     {
         public Customer Customer { get; set; }
         public ICollection<BasketItem.BasketItem> Items { get; private set; }
+        public Money Discount { get; private set; }
+
         public Money TotalPrice { get; private set; }
         public Money TotalTax { get; private set; }
 
@@ -26,45 +28,29 @@ namespace Alakazam.Basket.Domain
             AddEvent(new BasketCreatedDomainEvent(customer));
         }
 
-
         public Basket AddProduct(ushort quantity, Product product)
         {
             Guard.That(product == null, BasketDomainErrors.ProductCanNotBeNull);
-            Guard.That(product.Metadata == null, BasketDomainErrors.ProductMetadataCanNotBeNull);
-
-            Guard.That(product.Metadata.Stock < quantity, BasketDomainErrors.BasketItemQuantityCanNotBeGreatherThanProductStock);
-            Guard.That(product.Metadata.MaximumPurchasable < quantity, BasketDomainErrors.BasketItemQuantityCanNotBeGreatherThanProductMaximumPurchasable);
-
-            BasketItem.BasketItem basketItem = Items.FirstOrDefault(x => x.Product.Id == product.Id);
-            if (basketItem == null)
-            {
-                basketItem = new BasketItem.BasketItem(quantity, product);
-                Items.Add(basketItem);
-            }
-            else
-                basketItem.SetQuantity((ushort)(basketItem.Quantity + quantity));
-
-            Calculate();
-
-            AddEvent(new BasketItemAddedDomainEvent(Customer, basketItem));
-            return this;
-        }
-
-        public Basket BasketItemQuantityUpdate(Guid basketItemId, ushort quantity)
-        {
-            Guard.That(basketItemId == null || basketItemId == Guid.Empty, BasketDomainErrors.BasketItemIdCanNotBeNull);
-
             Guard.That(quantity <= 0, BasketDomainErrors.BasketItemQuantityCanNotBeEqualOrLessThanZero);
 
-            BasketItem.BasketItem findedBasketItem = Items.FirstOrDefault(x => x.Id == basketItemId);
+            Guard.That(product.Metadata.MaximumPurchasable < quantity, BasketDomainErrors.BasketItemQuantityCanNotBeGreatherThanProductMaximumPurchasable);
 
-            Guard.That(findedBasketItem == null, BasketDomainErrors.FindedBasketItemCanNotBeNull);
+            // Guard.That(Items.Any(x=>x.Product.Id==product.Id), BasketDomainErrors.ProductCanNotBeExists);
 
-            findedBasketItem.SetQuantity(quantity);
+            BasketItem.BasketItem findedBasketItem = Items.FirstOrDefault(x => x.Product.Id == product.Id);
+
+            if (findedBasketItem == null)
+            {
+                findedBasketItem = new BasketItem.BasketItem(quantity, product);
+                Items.Add(findedBasketItem);
+            }
+            else
+            {
+                findedBasketItem.IncQuantity();
+            }
+
 
             Calculate();
-
-            AddEvent(new BasketItemQuantityUpdatedDomainEvent(Customer, findedBasketItem));
 
             return this;
         }
