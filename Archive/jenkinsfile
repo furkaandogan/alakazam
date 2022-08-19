@@ -1,0 +1,35 @@
+@Library("gallifrey") _
+
+docker_stack_deployment_pipeline {
+  application=[
+    name:'alakazam.basket.web.api',
+    version:'1.0'
+  ]
+  jenkins=[
+    agent:[
+        label:'exlinetr-docker-slave'
+    ]
+  ]
+  docker=[
+    build:[
+      enabled:true,
+      dockerfile:'dockerfile',
+      remote:[
+        address:'tcp://<ip>:2376',
+        credentialId:'exlinetr-prod-docker-agent-01'
+      ]
+    ],
+    stack:[
+      composefile:'docker/docker-cloud.yml',
+      clusters:[
+        svayp_cluster:[
+          address:'tcp://<ip>:2376',
+          credentialId:'exlinetr-prod-docker-agent-01'
+        ]
+      ],
+      args:[
+          'ENV':'prod'
+      ]
+    ]
+  ]
+}
